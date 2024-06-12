@@ -16,6 +16,4 @@
         const day = Math.floor(secondPast / 86400);
         return day === 1 ? `${day} day ago` : `${day} days ago`;
     }
-
-
 }
