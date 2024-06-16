@@ -1,17 +1,23 @@
-﻿import { INews } from "@/entities/news";
-import { TOTAL_PAGES } from "@/shared/constant/constant";
+﻿import { TOTAL_PAGES } from "@/shared/constant/constant";
 import { IFilters } from "@/shared/interfaces";
 import { NewsList } from "@/widgets/news";
 import { usePaginationNews } from "../../utils/hooks/usePaginationNews";
 import { Pagination } from "@/features/pagination";
+import { useDebounce } from "@/shared/hooks/useDebounce";
+import { useGetNewsQuery } from "@/entities/news/api/newsApi";
 
 interface Props {
     filters: IFilters;
-    news: INews[];
-    isLoading: boolean;
 }
 
-const NewsListWithPagination = ({filters, news, isLoading}: Props) => {
+const NewsListWithPagination = ({filters}: Props) => {
+
+    const debouncedKeywords=useDebounce(filters.keywords, 1500);
+
+    const { data, isLoading } = useGetNewsQuery({
+        ...filters,
+        keywords: debouncedKeywords,
+    });
 
     const {handleNextPage, handlePreviousPage, handlePageClick} = usePaginationNews(filters);
 
@@ -29,7 +35,7 @@ const NewsListWithPagination = ({filters, news, isLoading}: Props) => {
                     direction="column"
                     type="item"
                     isLoading={isLoading} 
-                    news={news}
+                    news={data && data.news}
                 />
             </Pagination>
     )
