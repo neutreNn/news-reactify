@@ -14,13 +14,12 @@ const NewsDetails = ({ item }: Props) => {
 
       <div className={styles.description}>
         <p>
-          {item.description} ({item.language}) 
-          <a target="_blank" href={item.url}>Read more...</a>
+          {item.description} ({item.language}) <a target="_blank" href={item.url}>Read more...</a>
         </p>
         <p className={styles.extra}>
           {formatTimeAgo(item.published)} by {item.author}
         </p>
-        <ul>
+        <ul className={styles.categories}>
           {item.category.map((category) => {
             return <button className={styles.active}>{category}</button>
           })}
