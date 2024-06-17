@@ -2,13 +2,14 @@
 import { NewsList } from '@/widgets/news';
 import styles from './styles.module.css'
 import { INews } from '@/entities/news';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@/app/appStore';
 import { setCurrentNews } from '@/entities/news/model/newsSlices';
-import { useNavigate } from 'react-router-dom'
 
 const LatestNews = () => {
 
     const { data, isLoading } = useGetLatestNewsQuery(null);
+
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -17,6 +18,7 @@ const LatestNews = () => {
         navigate(`/news/${news.id}`);   
     }
 
+
     return (
         <section className={styles.section}> 
             <NewsList
@@ -24,7 +26,7 @@ const LatestNews = () => {
                 direction="row" 
                 news={data && data.news} 
                 isLoading={isLoading} 
-                viewNewsSlot={(news: INews) => <p onClick={() => navigateTo(news)}>view more...</p>}
+                viewNewsSlot={(news: INews) => <p style={{color: "#6b4eff", cursor: "pointer"}} onClick={() => navigateTo(news)}>view more...</p>}
             />
         </section>
     );

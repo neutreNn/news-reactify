@@ -6,3 +6,7 @@
     width: 100%;
     gap: 32px;
 }
+
+.viewButton {
+    display: flex;
+}

@@ -26,6 +26,11 @@
   color: #6b4eff;
 }
 
+.categories {
+  display: flex;
+  gap: 10px;
+}
+
 @media (max-width: 768px) {
   .details {
     grid-template-columns: 1fr;
